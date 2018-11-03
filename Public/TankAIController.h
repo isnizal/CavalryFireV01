@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include"TankPlayer.h"
 #include "TankAIController.generated.h"
 
 /**
@@ -14,7 +15,12 @@ class CAVALRYFIREV01_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 	
-	
+public:
+	ATankPlayer * GetControlledTank();
+	ATankPlayer * PlayerTank();
+protected:
+	virtual void BeginPlay() override;
+
 	
 	
 };

@@ -11,5 +11,13 @@ ATankPlayer * ATankPlayerController:: GetControlledTank()
 void ATankPlayerController::BeginPlay()
 {
 	auto PlayerTank = GetControlledTank();
-	UE_LOG(LogTemp, Warning, TEXT("Possessing tank : %s"), *(PlayerTank->GetName()));
+	if (PlayerTank)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Possessing tank : %s"), *(PlayerTank->GetName()));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("not possessing tank"));
+	}
+	
 }
