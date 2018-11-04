@@ -13,7 +13,7 @@ void ATankPlayerController::AimTowardCrossHair()
 	FVector HitLocation;
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Player hit: %s"),*(HitLocation.ToString()));
+		//UE_LOG(LogTemp, Warning, TEXT("Player hit: %s"),*(HitLocation.ToString()));
 	}
 	//find tank location trace with crosshair
 	//if hit the landscape
@@ -28,9 +28,13 @@ void ATankPlayerController::Tick(float DeltaSeconds)
 }
 bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation) const
 {
-	HitLocation = FVector(1.0f);
 	//use viewport to find crosshair
-	//matches with the hit location
+	int32 ViewPortSizeX, ViewPortSizeY;
+	GetViewportSize(ViewPortSizeX, ViewPortSizeY);
+	auto ScreenLocation = FVector2D(CrossHairX * ViewPortSizeX, CrossHairY* ViewPortSizeY);
+	UE_LOG(LogTemp, Warning, TEXT("Screen size is : %s"), *(ScreenLocation.ToString()))
+	//convert the screen position into the world
+	//how long the trace hitting the landscape
 	return true;
 }
 

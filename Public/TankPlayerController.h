@@ -23,5 +23,9 @@ protected:
 	void Tick(float DeltaSeconds);
 	bool GetSightRayHitLocation(FVector &HitLocation) const;
 	virtual void BeginPlay() override;
-
+private:
+	UPROPERTY(EditAnywhere, Category = CrossHair)
+		float CrossHairX = 0.5;
+	UPROPERTY(EditAnywhere, Category = CrossHair)
+		float CrossHairY = 0.33;
 };
