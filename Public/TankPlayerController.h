@@ -19,7 +19,9 @@ public:
 	ATankPlayer * GetControlledTank();
 	
 protected:
+	void AimTowardCrossHair();
+	void Tick(float DeltaSeconds);
+	bool GetSightRayHitLocation(FVector &HitLocation) const;
 	virtual void BeginPlay() override;
-	
-	
+
 };
