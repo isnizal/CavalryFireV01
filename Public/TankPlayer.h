@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include"AimTankComponents.h"
 #include "TankPlayer.generated.h"
 
 UCLASS()
@@ -18,6 +19,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	UAimTankComponents * AimingTankComponents;
 
 public:	
 	// Called every frame
@@ -25,6 +27,8 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	void AimAt(FVector HitLocation);
 
 	
 	

@@ -16,14 +16,14 @@ class CAVALRYFIREV01_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
-	ATankPlayer * GetControlledTank();
+	ATankPlayer * GetControlledTank() const;
 	
 	
 protected:
 	void AimTowardCrossHair();
 	void Tick(float DeltaSeconds);
 	bool GetSightRayHitLocation(FVector &HitLocation) const;
-	bool GetVictorHitLocation(FVector WorldDirection, FVector & HitLocation) const;
+	bool GetVictorHitLocation(FVector WorldDirection, FVector  &HitLocation) const;
 	bool LookDirection(FVector2D ScreenLocation, FVector & WorldDirection) const;
 	virtual void BeginPlay() override;
 private:

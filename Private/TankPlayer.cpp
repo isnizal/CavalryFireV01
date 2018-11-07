@@ -8,6 +8,7 @@ ATankPlayer::ATankPlayer()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	AimingTankComponents = CreateDefaultSubobject<UAimTankComponents>(FName("AimTankComponents"));
 
 }
 
@@ -30,5 +31,9 @@ void ATankPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+void ATankPlayer::AimAt(FVector HitLocation)
+{
+	AimingTankComponents->AimAt(HitLocation);
 }
 

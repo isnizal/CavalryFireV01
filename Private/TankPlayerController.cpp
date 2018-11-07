@@ -4,7 +4,7 @@
 #include"Classes/Engine/World.h"
 
 
-ATankPlayer * ATankPlayerController:: GetControlledTank()
+ATankPlayer * ATankPlayerController:: GetControlledTank()const
 {
 	return Cast<ATankPlayer>(GetPawn());
 }
@@ -27,7 +27,7 @@ void ATankPlayerController::Tick(float DeltaSeconds)
 	AimTowardCrossHair();
 
 }
-bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation) const
+bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 {
 	//use viewport to find crosshair
 	int32 ViewPortSizeX, ViewPortSizeY;
@@ -39,13 +39,16 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation) const
 	if (LookDirection(ScreenLocation,WorldDirection))
 	{
 		//how long the trace hitting the landscape
-		GetVictorHitLocation(WorldDirection, HitLocation);
-		UE_LOG(LogTemp, Warning, TEXT("HitLocation at : %s"), *(HitLocation.ToString()))
+		if (GetVictorHitLocation(WorldDirection, HitLocation))
+		{
+			GetControlledTank()->AimAt(HitLocation);
+		}
+		
 	}
 	
 	return true;
 }
-bool ATankPlayerController::GetVictorHitLocation(FVector WorldDirection, FVector &HitLocation) const
+bool ATankPlayerController::GetVictorHitLocation(FVector WorldDirection, FVector& HitLocation) const
 {
 	FHitResult HitResult;
 	FVector StartLocation = PlayerCameraManager->GetCameraLocation();

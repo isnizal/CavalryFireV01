@@ -5,6 +5,7 @@
 
 void ATankAIController::BeginPlay()
 {
+	Super::BeginPlay();
 	auto AIController = PlayerTank();
 	if (AIController)
 	{
@@ -14,6 +15,20 @@ void ATankAIController::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("not possessing AI controller"));
 	}
+}
+void ATankAIController::Tick(float deltaTime)
+{
+	Super::Tick(deltaTime);
+	//move toward player
+
+	//aim toward player
+	if (PlayerTank())
+	{
+		GetControlledTank()->AimAt(PlayerTank()->GetActorLocation());
+	}
+
+	//fire when ready
+
 }
 ATankPlayer * ATankAIController::GetControlledTank()
 {
