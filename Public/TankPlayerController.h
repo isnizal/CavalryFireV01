@@ -22,6 +22,7 @@ protected:
 	void AimTowardCrossHair();
 	void Tick(float DeltaSeconds);
 	bool GetSightRayHitLocation(FVector &HitLocation) const;
+	bool LookDirection(FVector2D ScreenLocation, FVector & WorldDirection) const;
 	virtual void BeginPlay() override;
 private:
 	UPROPERTY(EditAnywhere, Category = CrossHair)

@@ -32,10 +32,20 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation) const
 	int32 ViewPortSizeX, ViewPortSizeY;
 	GetViewportSize(ViewPortSizeX, ViewPortSizeY);
 	auto ScreenLocation = FVector2D(CrossHairX * ViewPortSizeX, CrossHairY* ViewPortSizeY);
-	UE_LOG(LogTemp, Warning, TEXT("Screen size is : %s"), *(ScreenLocation.ToString()))
+	//UE_LOG(LogTemp, Warning, TEXT("Screen size is : %s"), *(ScreenLocation.ToString()))
 	//convert the screen position into the world
+	FVector WorldDirection;
+	if (LookDirection(ScreenLocation,WorldDirection))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("World Direction is : %s"), *(WorldDirection.ToString()))
+	}
 	//how long the trace hitting the landscape
 	return true;
+}
+bool ATankPlayerController::LookDirection(FVector2D ScreenLocation, FVector & WorldDirection) const
+{
+	FVector HitLocation;
+	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, HitLocation, WorldDirection);
 }
 
 void ATankPlayerController::BeginPlay()
