@@ -18,10 +18,12 @@ class CAVALRYFIREV01_API ATankPlayerController : public APlayerController
 public:
 	ATankPlayer * GetControlledTank();
 	
+	
 protected:
 	void AimTowardCrossHair();
 	void Tick(float DeltaSeconds);
 	bool GetSightRayHitLocation(FVector &HitLocation) const;
+	bool GetVictorHitLocation(FVector WorldDirection, FVector & HitLocation) const;
 	bool LookDirection(FVector2D ScreenLocation, FVector & WorldDirection) const;
 	virtual void BeginPlay() override;
 private:
@@ -29,4 +31,6 @@ private:
 		float CrossHairX = 0.5;
 	UPROPERTY(EditAnywhere, Category = CrossHair)
 		float CrossHairY = 0.33;
+	UPROPERTY(EditAnywhere, Category = LineTrace)
+	float LineTraceRange = 1000000.0f;
 };
