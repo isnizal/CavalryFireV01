@@ -36,7 +36,10 @@ void UAimTankComponents::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 
 void UAimTankComponents::AimAt(FVector HitLocation, float launchspeed)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Firing speed: %f"), launchspeed);
+	FVector TossVelocity;
+	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectiles"));
+	auto AimDirection = TossVelocity.GetSafeNormal();
+	UE_LOG(LogTemp, Warning, TEXT("Firing at: %s"), *AimDirection.ToString());
 }
 
 void UAimTankComponents::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
