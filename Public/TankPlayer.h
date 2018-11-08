@@ -19,7 +19,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	UAimTankComponents * AimingTankComponents;
+	UAimTankComponents * AimingTankComponents = nullptr;
 
 public:	
 	// Called every frame
@@ -31,5 +31,7 @@ public:
 	void AimAt(FVector HitLocation);
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UStaticMeshComponent * BarrelToSet);
+	UPROPERTY(EditAnywhere, Category = CanonFire)
+	float launchSpeed = 10000;
 	
 };

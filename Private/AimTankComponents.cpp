@@ -34,16 +34,14 @@ void UAimTankComponents::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	// ...
 }
 
-void UAimTankComponents::AimAt(FVector HitLocation)
+void UAimTankComponents::AimAt(FVector HitLocation, float launchspeed)
 {
-	auto TankName = GetOwner()->GetName();
-	//auto BarrelComp = Barrel->GetComponentLocation();
-	UE_LOG(LogTemp, Warning, TEXT(" %s, Aiming at : %s"), *TankName, *(HitLocation.ToString()));
+	UE_LOG(LogTemp, Warning, TEXT("Firing speed: %f"), launchspeed);
 }
 
 void UAimTankComponents::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
 {
-	BarrelToSet = Barrel;
+	Barrel = BarrelToSet;
 }
 
 

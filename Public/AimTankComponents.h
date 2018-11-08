@@ -15,7 +15,7 @@ class CAVALRYFIREV01_API UAimTankComponents : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UAimTankComponents();
-	void AimAt(FVector HitLocation);
+	void AimAt(FVector HitLocation, float launchspeed);
 	void SetBarrelReference(UStaticMeshComponent * BarrelToSet);
 
 protected:
@@ -26,8 +26,8 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	
-	UStaticMeshComponent * Barrel;
+private:	
+	UStaticMeshComponent * Barrel = nullptr;
 
 		
 	

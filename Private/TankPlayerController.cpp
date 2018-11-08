@@ -58,13 +58,13 @@ bool ATankPlayerController::GetVictorHitLocation(FVector WorldDirection, FVector
 		HitLocation = HitResult.Location;
 		return true;
 	}
-	 HitLocation = FVector(0);
+	 HitLocation = FVector(0.0f);
 	 return false;
 }
 bool ATankPlayerController::LookDirection(FVector2D ScreenLocation, FVector & WorldDirection) const
 {
-	FVector HitLocation;
-	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, HitLocation, WorldDirection);
+	FVector WorldSpace;
+	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, WorldSpace, WorldDirection);
 }
 
 void ATankPlayerController::BeginPlay()
