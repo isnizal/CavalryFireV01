@@ -7,6 +7,7 @@
 #include"AimTankComponents.h"
 #include "TankPlayer.generated.h"
 
+class UTankBarrel;
 UCLASS()
 class CAVALRYFIREV01_API ATankPlayer : public APawn
 {
@@ -30,7 +31,7 @@ public:
 
 	void AimAt(FVector HitLocation);
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UStaticMeshComponent * BarrelToSet);
+	void SetBarrelReference(UTankBarrel * BarrelToSet);
 	UPROPERTY(EditAnywhere, Category = CanonFire)
 	float launchSpeed = 10000;
 	

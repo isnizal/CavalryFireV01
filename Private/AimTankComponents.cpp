@@ -3,6 +3,7 @@
 #include "AimTankComponents.h"
 #include"Classes/Components/StaticMeshComponent.h"
 #include"GameFramework/Actor.h"
+#include"TankBarrel.h"
 #include"Kismet/GameplayStatics.h"
 
 
@@ -36,12 +37,12 @@ void UAimTankComponents::MoveTowardsBarrel(FVector HitDirection)
 	auto BarrelRotation = Barrel->GetForwardVector().Rotation();
 	auto RotateBarrel = HitDirection.Rotation();
 	auto GetRotator = RotateBarrel - BarrelRotation;
-	auto TankName = GetOwner()->GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s: Rotate at: %s"), *TankName, *GetRotator.ToString());
+	Barrel->Elevation(5);
+	
 
 }
 
-void UAimTankComponents::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
+void UAimTankComponents::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	Barrel = BarrelToSet;
 }
