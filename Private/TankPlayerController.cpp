@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankPlayerController.h"
+#include "TankPlayer.h"
 #include"Classes/Engine/World.h"
 
 
