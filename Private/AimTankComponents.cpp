@@ -37,7 +37,7 @@ void UAimTankComponents::MoveTowardsBarrel(FVector HitDirection)
 	auto BarrelRotation = Barrel->GetForwardVector().Rotation();
 	auto RotateBarrel = HitDirection.Rotation();
 	auto GetRotator = RotateBarrel - BarrelRotation;
-	Barrel->Elevation(5);
+	Barrel->Elevation(5.0f);
 	
 
 }
