@@ -5,7 +5,13 @@
 
 void UTankBarrel::Elevation(float perSeconds)
 {
-	//auto TankName = GetOwner()->GetName();
+
 	auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT("%f:Elevation()-Barrel: %f") ,Time, perSeconds );
+	auto GetSpecificRelativeSpeed = FMath::Clamp<float>(perSeconds, -1, 1);
+	auto GetRotationElevate = MaxPerSeconds * GetSpecificRelativeSpeed * GetWorld()->DeltaTimeSeconds;
+	auto RawNewElevation = RelativeRotation.Pitch + GetRotationElevate;
+	auto Elevation = FMath::Clamp<float>(RawNewElevation, MinAngle, MaxAngle);
+	SetRelativeRotation(FRotator(Elevation,0,0));
+
+	UE_LOG(LogTemp, Warning, TEXT("%f, Elevation->Barrel: %f"), Time, perSeconds);
 }
