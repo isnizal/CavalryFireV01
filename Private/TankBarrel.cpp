@@ -3,15 +3,17 @@
 #include "TankBarrel.h"
 #include"Engine/World.h"
 
-void UTankBarrel::Elevation(float perSeconds)
+void UTankBarrel::Elevation(float GetSpecificRelativeSpeed)
 {
-
-	auto Time = GetWorld()->GetTimeSeconds();
-	auto GetSpecificRelativeSpeed = FMath::Clamp<float>(perSeconds, -1, 1);
-	auto GetRotationElevate = MaxPerSeconds * GetSpecificRelativeSpeed * GetWorld()->DeltaTimeSeconds;
-	auto RawNewElevation = RelativeRotation.Pitch + GetRotationElevate;
+	//get specific float of the angle
+	GetSpecificRelativeSpeed = FMath::Clamp<float>(GetSpecificRelativeSpeed, -1, +1);
+	//get rotation speed to multiply with specific float using max angle and time
+	auto GetRotationSpeed = MaxPerSeconds * GetSpecificRelativeSpeed * GetWorld()->DeltaTimeSeconds;
+	//get the new elevation by addition the original y with rotation speed
+	auto RawNewElevation = RelativeRotation.Pitch + GetRotationSpeed;
+	//find specific angle with the current elevation, min and max.
 	auto Elevation = FMath::Clamp<float>(RawNewElevation, MinAngle, MaxAngle);
+	//set the original location into the new rotator of elevation
 	SetRelativeRotation(FRotator(Elevation,0,0));
 
-	UE_LOG(LogTemp, Warning, TEXT("%f, Elevation->Barrel: %f"), Time, perSeconds);
 }

@@ -5,6 +5,7 @@
 #include"GameFramework/Actor.h"
 #include"TankBarrel.h"
 #include"Kismet/GameplayStatics.h"
+#include"Engine/World.h"
 
 
 // Sets default values for this component's properties
@@ -21,24 +22,38 @@ UAimTankComponents::UAimTankComponents()
 
 void UAimTankComponents::AimAt(FVector HitLocation, float launchspeed)
 {
+	//get the toss velocity vector
 	FVector TossVelocity;
+	//get start location vector by using barrel socket name position
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectiles"));
+	//get projectiles name to use suggesst projectile velocity
 	bool Projectiles = UGameplayStatics::SuggestProjectileVelocity(this, TossVelocity, StartLocation, HitLocation, launchspeed, true, 0, 0, ESuggestProjVelocityTraceOption::DoNotTrace);
 	if (Projectiles)
 	{
+		//set the vector of toss velocity to zero
 		auto AimDirection = TossVelocity.GetSafeNormal();
-
-		
+		//get time seconds
+		auto Time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f, Aim solution found"), Time);
+		//use toss velocity zero 
 		MoveTowardsBarrel(AimDirection);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%f, Aim solution not found"));
 	}
 }
 void UAimTankComponents::MoveTowardsBarrel(FVector HitDirection)
 {
-	auto BarrelRotation = Barrel->GetForwardVector().Rotation();
+	//get barrel forward vector with rotation
+	auto BarrelRotationNormal = Barrel->GetForwardVector().Rotation();
+	//get the barrel hit rotation
 	auto RotateBarrel = HitDirection.Rotation();
-	auto GetRotator = RotateBarrel - BarrelRotation;
-	Barrel->Elevation(5.0f);
-	
+	//get the rotator hit direction to minus with the barrel rotation
+	auto GetRotator = RotateBarrel - BarrelRotationNormal;
+	//set the barrel rotator with pitch
+	Barrel->Elevation(GetRotator.Pitch);
+	//UE_LOG(LogTemp, Warning, TEXT("Hit is:%s"), *HitDirection.ToString());
 
 }
 
