@@ -58,7 +58,7 @@ bool ATankPlayerController::GetVictorHitLocation(FVector WorldDirection, FVector
 	//end location  should be the start location multiply with the line trace
 	FVector EndLocation = StartLocation + (WorldDirection * LineTraceRange);
 	//spawn line trace using the with the hit result, start, and end location
-	if (GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECollisionChannel::ECC_Visibility))
+	if (GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECollisionChannel::ECC_Camera))
 	{
 		//show of hit result with the location
 		HitLocation = HitResult.Location;

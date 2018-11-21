@@ -4,6 +4,7 @@
 #include"Classes/Components/StaticMeshComponent.h"
 #include"GameFramework/Actor.h"
 #include"TankBarrel.h"
+#include"TurretTank.h"
 #include"Kismet/GameplayStatics.h"
 #include"Engine/World.h"
 
@@ -13,7 +14,7 @@ UAimTankComponents::UAimTankComponents()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 
 	// ...
 }
@@ -27,8 +28,8 @@ void UAimTankComponents::AimAt(FVector HitLocation, float launchspeed)
 	//get start location vector by using barrel socket name position
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectiles"));
 	//get projectiles name to use suggesst projectile velocity
-	bool Projectiles = UGameplayStatics::SuggestProjectileVelocity(this, TossVelocity, StartLocation, HitLocation, launchspeed, true, 0, 0, ESuggestProjVelocityTraceOption::DoNotTrace);
-	if (Projectiles)
+	bool bHaveSolution = UGameplayStatics::SuggestProjectileVelocity(this, TossVelocity, StartLocation, HitLocation, launchspeed, true, 0, 0, ESuggestProjVelocityTraceOption::DoNotTrace);
+	if (bHaveSolution)
 	{
 		//set the vector of toss velocity to zero
 		auto AimDirection = TossVelocity.GetSafeNormal();
@@ -54,12 +55,20 @@ void UAimTankComponents::MoveTowardsBarrel(FVector HitDirection)
 	//set the barrel rotator with pitch
 	Barrel->Elevation(GetRotator.Pitch);
 	//UE_LOG(LogTemp, Warning, TEXT("Hit is:%s"), *HitDirection.ToString());
-
+	//set the turret to rotate in yaw
+	TurretTank->TurretRotate(GetRotator.Yaw);
 }
 
 void UAimTankComponents::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
+	if (!BarrelToSet) { return; }
 	Barrel = BarrelToSet;
+}
+
+void UAimTankComponents::SetTurretReference(UTurretTank * BarrelToSet)
+{
+	if (!BarrelToSet) { return; }
+	TurretTank = BarrelToSet;
 }
 
 

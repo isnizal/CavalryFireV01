@@ -20,8 +20,6 @@ public:
 	
 	UPROPERTY(EditAnywhere, Category = Setup)
 	float MaxPerSeconds = 5.0f;
-	UPROPERTY(EditAnywhere, Category = Setup)
-	float MaxYawSeconds = 10.0f;
 	//Sensible defaults
 	UPROPERTY(EditAnywhere, Category = Setup)
 	float MaxAngle = 40.0f;

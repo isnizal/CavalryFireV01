@@ -19,12 +19,11 @@ void ATankPlayer::BeginPlay()
 	
 }
 
-// Called every frame
-void ATankPlayer::Tick(float DeltaTime)
+void ATankPlayer::TankFire() const
 {
-	Super::Tick(DeltaTime);
-
+	UE_LOG(LogTemp, Log, TEXT("Tank is firing"));
 }
+
 
 // Called to bind functionality to input
 void ATankPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -40,5 +39,10 @@ void ATankPlayer::AimAt(FVector HitLocation)
 void ATankPlayer::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	AimingTankComponents->SetBarrelReference(BarrelToSet);
+}
+
+void ATankPlayer::SetTurretReference(UTurretTank * TurretToSet)
+{
+	AimingTankComponents->SetTurretReference(TurretToSet);
 }
 

@@ -7,6 +7,7 @@
 #include "AimTankComponents.generated.h"
 
 class UTankBarrel;
+class UTurretTank;
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class CAVALRYFIREV01_API UAimTankComponents : public UActorComponent
 {
@@ -18,6 +19,7 @@ public:
 	void AimAt(FVector HitLocation, float launchspeed);
 	void MoveTowardsBarrel(FVector HitDirection);
 	void SetBarrelReference(UTankBarrel * BarrelToSet);
+	void SetTurretReference(UTurretTank * TurretToSet);
 
 protected:
 	// Called when the game start
@@ -27,6 +29,7 @@ public:
 
 private:	
 	UTankBarrel * Barrel = nullptr;
+	UTurretTank * TurretTank = nullptr;
 
 		
 	
